@@ -465,6 +465,64 @@ where we should have:
 
 Success!
 
+## Setting up reverse proxy
+
+### Step 1: Setup config file
+
+locate your config file, and open it using:
+```
+sudo nano /etc/nginx/sites-available/default
+```
+this give us access to the following (this is only part):
+```
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# https://www.nginx.com/resources/wiki/start/
+```
+
+### step 2: Change port
+We need to change where the server 'listens' to, to do this navigate down to here:
+
+```
+server 
+#       listen 80;
+#       listen [::]:80;
+#
+#       server_name example.com;
+```
+we need to change it to our IP address, 
+```
+192.168.10.100
+```
+
+### step 3: change location
+now we need to change the location so the proxy can pass through properly. replace it with this:
+```
+.
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+```
+then save and run it again via:
+```
+node app.js
+```
+
+
+
+
+
+
+
+
+
+
 ## Addtional comments:
 It is possible to create variables in the Git Bash terminal, (within the VM)
 here is an example: 
