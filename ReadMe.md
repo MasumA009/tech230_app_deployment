@@ -473,7 +473,7 @@ locate your config file, and open it using:
 ```
 sudo nano /etc/nginx/sites-available/default
 ```
-this give us access to the following (this is only part):
+this give us access to the following, the config file (this is only part):
 ```
 # You should look at the following URL's in order to grasp a solid understanding
 # of Nginx configuration files in order to fully unleash the power of Nginx.
@@ -509,11 +509,17 @@ now we need to change the location so the proxy can pass through properly. repla
     }
 
 ```
-then save and run it again via:
-```
-node app.js
-```
+### Step 4: last code
 
+then try run:
+```
+sudo nginx -t
+```
+lastlly, we need to restart in order to run use:
+```
+sudo systemctl restart nginx
+```
+![Alt text](success!.png)
 
 
 
